@@ -8,6 +8,7 @@ Just a simple script for switching local terraform versions
 ## Usage
 
 `tfenv` - shows currently installed versions
+
 `tfenv <version>` - use specific version.
 
 ## Behind the scenes
