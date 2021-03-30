@@ -4,6 +4,9 @@ Just a simple script for switching local terraform versions
 - wget, unzip, curl
 - put `tfenv` in your $PATH
 
+## Installation
+
+wget https://raw.githubusercontent.com/atanass/tfenv/master/bin/tfenv -P /usr/local/bin && chmod +x /usr/local/bin/tfenv
 
 ## Usage
 
