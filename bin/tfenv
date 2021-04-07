@@ -13,13 +13,13 @@ pre_check() {
 }
 
 get_current_version() {
-    terraform --version | head -n1 | cut -d' ' -f2 | cut -d'v' -f2
+    terraform --version | grep "Terraform v" | cut -d' ' -f2 | cut -d'v' -f2
 }
 
 get_all_versions() {
     cv=$(get_current_version)
     for v in `find /usr/local/bin/ -name 'terraform*' -type f` ; do
-        version=$($v --version | head -n1 | cut -d' ' -f2 | cut -d'v' -f2)
+        version=$($v --version | grep "Terraform v" | cut -d' ' -f2 | cut -d'v' -f2)
         if [ "$version" = "$cv" ]; then
             echo "$version <---current"
         else
