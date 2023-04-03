@@ -1,7 +1,7 @@
 #!/bin/sh
 HELP="Usage: $0 <version>"
-URL="https://releases.hashicorp.com/terraform/0.14.0/terraform_0.14.0_darwin_amd64.zip"
 LATEST="0.14.0"
+URL="https://releases.hashicorp.com/terraform/${LATEST}/terraform_${LATEST}_darwin_amd64.zip"
 
 pre_check() {
     for cmd in wget curl unzip ; do
@@ -13,7 +13,9 @@ pre_check() {
 }
 
 get_current_version() {
-    terraform --version | grep "Terraform v" | cut -d' ' -f2 | cut -d'v' -f2
+    if command -v terraform > /dev/null; then
+      terraform --version | grep "Terraform v" | cut -d' ' -f2 | cut -d'v' -f2
+    fi
 }
 
 get_all_versions() {
@@ -67,17 +69,6 @@ switch_version() {
 
 pre_check
 
-if !(command -v terraform > /dev/null) ; then
-    while true ; do
-        read -p "Terraform is not installed. Want to install $LATEST? " input
-        case $input in
-            [Yy]* ) download_version $LATEST ; exit ;;
-            [Nn]* ) exit ;;
-            * ) echo "Yes or No" ;;
-        esac
-    done
-    exit
-fi
 
 if [ -z $1 ]; then
     get_all_versions
