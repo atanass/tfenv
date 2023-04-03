@@ -45,7 +45,7 @@ download_version() {
     response=`curl -s -o /dev/null -w "%{http_code}" $URL`
     if [ "$response" = "200" ]; then
         rm /usr/local/bin/terraform &> /dev/null
-        wget -O /tmp/terraform.zip $URL && unzip /tmp/terraform.zip -d /tmp/ && mv /tmp/terraform /usr/local/bin/terraform-$version && ln -s /usr/local/bin/terraform-$version /usr/local/bin/terraform
+        wget -q -O /tmp/terraform.zip $URL && unzip /tmp/terraform.zip -d /tmp/ && mv /tmp/terraform /usr/local/bin/terraform-$version && ln -s /usr/local/bin/terraform-$version /usr/local/bin/terraform
         echo "Terraform $version installed."
     else
         echo "Version $version can't be found at $URL"
